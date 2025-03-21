@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成科三灯光模拟图标</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            flex-direction: column;
+        }
+        
+        #iconCanvas {
+            width: 180px;
+            height: 180px;
+            background-color: #2c7ad6;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        p {
+            margin-top: 20px;
+            max-width: 400px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="iconCanvas" width="180" height="180"></canvas>
+    <button id="downloadBtn">下载图标</button>
+    <p>使用说明：点击下载按钮将图标保存到设备，再将图标添加到项目目录中，命名为"icon.png"。</p>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 绘制背景
+            ctx.fillStyle = '#2c7ad6';
+            ctx.fillRect(0, 0, 180, 180);
+            
+            // 绘制车辆轮廓
+            ctx.fillStyle = '#333';
+            ctx.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.arcTo(x + width, y, x + width, y + height, radius);
+                this.arcTo(x + width, y + height, x, y + height, radius);
+                this.arcTo(x, y + height, x, y, radius);
+                this.arcTo(x, y, x + width, y, radius);
+                this.closePath();
+                return this;
+            };
+            
+            // 绘制汽车主体
+            ctx.roundRect(45, 85, 90, 40, 10).fill();
+            
+            // 绘制灯光
+            function drawLight(x, y, isOn) {
+                ctx.beginPath();
+                ctx.arc(x, y, 12, 0, Math.PI * 2);
+                ctx.fillStyle = isOn ? '#ffff00' : '#888';
+                ctx.fill();
+                
+                if (isOn) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, 20, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 0, 0.5)';
+                    ctx.fill();
+                }
+            }
+            
+            // 绘制近光灯
+            drawLight(55, 85, true);
+            drawLight(125, 85, true);
+            
+            // 绘制文字
+            ctx.font = 'bold 36px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('灯光', 90, 50);
+            
+            // 下载按钮
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.download = 'icon.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html> 

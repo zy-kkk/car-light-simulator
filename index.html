@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="科三灯光模拟">
+    <link rel="apple-touch-icon" href="icon.png">
+    <title>科三考试灯光模拟</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>科三考试灯光模拟</h1>
+        
+        <div class="control-panel">
+            <div class="car">
+                <div class="headlights">
+                    <div class="light left-light"></div>
+                    <div class="light right-light"></div>
+                </div>
+                <div class="car-body"></div>
+                <div class="width-lights">
+                    <div class="width-light left-width-light"></div>
+                    <div class="width-light right-width-light"></div>
+                </div>
+            </div>
+            
+            <div class="light-controls">
+                <button id="lowBeam" class="control-btn">近光灯</button>
+                <button id="highBeam" class="control-btn">远光灯</button>
+                <button id="alternate" class="control-btn">远近光灯交替</button>
+                <button id="widthLight" class="control-btn">示廓灯</button>
+                <button id="turnOff" class="control-btn">关闭所有灯光</button>
+            </div>
+        </div>
+        
+        <div class="question-panel">
+            <div id="status" class="status">准备开始</div>
+            <div id="question" class="question"></div>
+            <div id="timer" class="timer">5</div>
+            <div id="result" class="result"></div>
+            <div id="correctAnswer" class="correct-answer"></div>
+            <div class="score-panel">
+                <span>总分: <span id="totalScore">100</span></span>
+                <span>答对: <span id="correctCount">0</span></span>
+                <span>答错: <span id="wrongCount">0</span></span>
+            </div>
+            <button id="startBtn" class="start-btn">开始模拟</button>
+        </div>
+        
+        <div class="history-panel">
+            <div class="tabs">
+                <button id="wrongQuestionsTab" class="tab-btn active">错题记录</button>
+                <button id="historyRecordsTab" class="tab-btn">训练记录</button>
+            </div>
+            
+            <div id="wrongQuestionsPanel" class="tab-panel active">
+                <h3>错题记录</h3>
+                <div id="wrongQuestionsList" class="record-list">
+                    <p class="empty-record">暂无错题记录</p>
+                </div>
+            </div>
+            
+            <div id="historyRecordsPanel" class="tab-panel">
+                <h3>训练记录</h3>
+                <div id="historyRecordsList" class="record-list">
+                    <p class="empty-record">暂无训练记录</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="add-to-home-tip" id="addToHomeTip" style="display:none; margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; text-align: left;">
+            <p><strong>提示：</strong>可以添加到iPhone主屏幕，获得更好的体验！</p>
+            <p>点击分享按钮 <span style="font-size: 1.2em;">↑</span> 然后选择"添加到主屏幕"。</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
